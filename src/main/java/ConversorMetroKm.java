@@ -1,6 +1,4 @@
 
-import exceptions.MetroAKilometroException;
-
 /**
  *
  * @author Usuario

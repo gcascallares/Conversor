@@ -8,9 +8,9 @@ package exceptions;
  *
  * @author nicolaslucero
  */
-public class MetroAKilometroException extends Exception {
+public class ConversorException extends NumberFormatException {
     
-    public MetroAKilometroException (String message) {
+    public ConversorException (String message) {
         super(message);
     }
 }
