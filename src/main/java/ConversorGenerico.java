@@ -105,7 +105,7 @@ public class ConversorGenerico extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Label2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                    .addComponent(Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -113,7 +113,7 @@ public class ConversorGenerico extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(ButtonConvertir))
                     .addComponent(FieldLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(ComboBoxConversores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,6 +173,14 @@ public class ConversorGenerico extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ingrese un valor numerico",
                      "Error de Conversion", JOptionPane.ERROR_MESSAGE);
+            
+            LimpiarTextField();
+            
+            if(convertirAValor2){
+                FieldLabel1.requestFocus();  
+            }else{
+                FieldLabel2.requestFocus();
+            }             
         }
     }
 
@@ -205,10 +213,13 @@ public class ConversorGenerico extends javax.swing.JFrame {
         conversorSeleccionado = conversores.get(selectedItem);
         Label1.setText(conversorSeleccionado.getLabel1());
         Label2.setText(conversorSeleccionado.getLabel2());
-        FieldLabel1.setText("");
-        FieldLabel2.setText("");
+        LimpiarTextField();
     }//GEN-LAST:event_ComboBoxConversoresItemStateChanged
 
+    private void LimpiarTextField(){
+        FieldLabel1.setText("");
+        FieldLabel2.setText("");
+    }
     /**
      * @param args the command line arguments
      */
