@@ -1,3 +1,6 @@
+
+import exceptions.MetroAKilometroException;
+
 /**
  *
  * @author Usuario
@@ -24,13 +27,14 @@ public class ConversorMetroKm extends Conversor {
     }
 
     @Override
-    public Double convertirValorUnoaValorDos(Double valorUno) {
-        return valorUno / UN_KILOMETRO;
+    public Double convertirValorUnoaValorDos(Double metros) {
+            return metros / UN_KILOMETRO;
+        
     }
     
 
     @Override
-    public Double convertirValoDosaValorUno(Double valorDos) {
-        return valorDos * UN_KILOMETRO;
+    public Double convertirValoDosaValorUno(Double metros) {
+        return metros * UN_KILOMETRO;
     }
 }

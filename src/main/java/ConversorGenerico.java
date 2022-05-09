@@ -149,20 +149,25 @@ public class ConversorGenerico extends javax.swing.JFrame {
 
     public void AplicarConversion() throws HeadlessException {
         try {
-            if(convertirAValor2){
+            if(convertirAValor2) {
                 var valor = FieldLabel1.getText().trim().replace(",", ".");
                 Double valorDouble = Double.valueOf(valor);
                 valorDouble = conversorSeleccionado.convertirValorUnoaValorDos(valorDouble);
-                FieldLabel2.setText(String.format("%.3f", valorDouble));
+                if (valorDouble  % 1 == 0)
+                    FieldLabel2.setText(String.format("%.0f", valorDouble));
+                else
+                    FieldLabel2.setText(String.format("%.3f", valorDouble));
             }
             else{
-                var valor = FieldLabel1.getText().trim().replace(",", ".");
+                var valor = FieldLabel2.getText().trim().replace(",", ".");
                 Double valorDouble = Double.valueOf(valor);
                 valorDouble = conversorSeleccionado.convertirValoDosaValorUno(valorDouble);
-                FieldLabel1.setText(String.format("%.3f", valorDouble));
+                if (valorDouble  % 1 == 0)
+                    FieldLabel1.setText(String.format("%.0f", valorDouble));
+                else
+                    FieldLabel1.setText(String.format("%.3f", valorDouble));
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,"Ingrese un valor numerico"
                     ,"Error de Conversion",JOptionPane.ERROR_MESSAGE);
         }
@@ -177,6 +182,7 @@ public class ConversorGenerico extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldLabel2FocusLost
 
     private void FieldLabel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldLabel1KeyPressed
+        // Si apreté enter
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             convertirAValor2 = true;
             AplicarConversion();
@@ -184,6 +190,7 @@ public class ConversorGenerico extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldLabel1KeyPressed
 
     private void FieldLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldLabel2KeyPressed
+   
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             convertirAValor2 = false;
             AplicarConversion();
@@ -195,6 +202,8 @@ public class ConversorGenerico extends javax.swing.JFrame {
         conversorSeleccionado = conversores.get(selectedItem);
         Label1.setText(conversorSeleccionado.getLabel1());
         Label2.setText(conversorSeleccionado.getLabel2());
+        FieldLabel1.setText("");
+        FieldLabel2.setText("");
     }//GEN-LAST:event_ComboBoxConversoresItemStateChanged
 
     /**

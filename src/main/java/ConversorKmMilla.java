@@ -4,7 +4,7 @@
  * @author Usuario
  */
 public class ConversorKmMilla extends Conversor {
-        private static final String KILOMETROS = "Kilometros";
+    private static final String KILOMETROS = "Kilometros";
     private static final String MILLAS = "Millas";
     public static final Double UNA_MILLA = 1.609;
     
