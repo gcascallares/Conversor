@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Usuario
@@ -21,19 +20,19 @@ public class ConversorGenerico extends javax.swing.JFrame {
      */
     public ConversorGenerico() {
         initComponents();
-        
+
         setLocationRelativeTo(null);
-        
+
         setTitle("Conversor");
-        
+
         setResizable(false);
-        
+
         conversores.add(new ConversorCentPulg());
         conversores.add(new ConversorMetroKm());
         conversores.add(new ConversorCentCubicLitro());
         conversores.add(new ConversorKmMilla());
         conversores.add(new ConversorMbGb());
-        
+
         for (Conversor conversor : conversores) {
             ComboBoxConversores.addItem(conversor.getTipo());
         }
@@ -147,29 +146,31 @@ public class ConversorGenerico extends javax.swing.JFrame {
         AplicarConversion();
     }//GEN-LAST:event_ButtonConvertirActionPerformed
 
+    private String mostrarValorDecimalOEntero(Double valorDouble) {
+        if (valorDouble % 1 == 0) {
+            return String.format("%.0f", valorDouble);
+        } else {
+            return String.format("%.3f", valorDouble);
+        }
+    }
+
     public void AplicarConversion() throws HeadlessException {
         try {
-            if(convertirAValor2) {
+            if (convertirAValor2) {
                 var valor = FieldLabel1.getText().trim().replace(",", ".");
                 Double valorDouble = Double.valueOf(valor);
                 valorDouble = conversorSeleccionado.convertirValorUnoaValorDos(valorDouble);
-                if (valorDouble  % 1 == 0)
-                    FieldLabel2.setText(String.format("%.0f", valorDouble));
-                else
-                    FieldLabel2.setText(String.format("%.3f", valorDouble));
-            }
-            else{
+                FieldLabel2.setText(mostrarValorDecimalOEntero(valorDouble));
+            } else {
                 var valor = FieldLabel2.getText().trim().replace(",", ".");
                 Double valorDouble = Double.valueOf(valor);
                 valorDouble = conversorSeleccionado.convertirValoDosaValorUno(valorDouble);
-                if (valorDouble  % 1 == 0)
-                    FieldLabel1.setText(String.format("%.0f", valorDouble));
-                else
-                    FieldLabel1.setText(String.format("%.3f", valorDouble));
+                FieldLabel1.setText(mostrarValorDecimalOEntero(valorDouble));
+
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,"Ingrese un valor numerico"
-                    ,"Error de Conversion",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ingrese un valor numerico",
+                     "Error de Conversion", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -183,15 +184,15 @@ public class ConversorGenerico extends javax.swing.JFrame {
 
     private void FieldLabel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldLabel1KeyPressed
         // Si apreté enter
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             convertirAValor2 = true;
             AplicarConversion();
         }
     }//GEN-LAST:event_FieldLabel1KeyPressed
 
     private void FieldLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldLabel2KeyPressed
-   
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             convertirAValor2 = false;
             AplicarConversion();
         }
@@ -254,4 +255,3 @@ public class ConversorGenerico extends javax.swing.JFrame {
     private List<Conversor> conversores = new ArrayList<Conversor>();
     private Conversor conversorSeleccionado;
 }
-
